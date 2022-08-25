@@ -2,7 +2,6 @@ import "./App.css";
 import Search from "./components/search/search.js";
 import CurrentWeather from "./components/current-weather/current-weather.js";
 import Forcast from "./components/forcast/forcast";
-import { WEATHER_API_URL, WEATHER_API_KEY } from "./api";
 import { useState } from "react";
 
 function App() {
@@ -13,11 +12,11 @@ function App() {
     const [lat, lon] = searchData.value.split(" ");
 
     const currentWeatherFetch = fetch(
-      `${WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
+      `${process.env.REACT_APP_WEATHER_API_URL}/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
     );
 
     const forecastFetch = fetch(
-      `${WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
+      `${process.env.REACT_APP_WEATHER_API_URL}/forecast?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`
     );
 
     Promise.all([currentWeatherFetch, forecastFetch])

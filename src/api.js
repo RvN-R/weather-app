@@ -5,9 +5,3 @@ export const geoApiOptions = {
     "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
   },
 };
-
-export const GEO_API_URL = process.env.GEO_API_URL;
-
-export const WEATHER_API_URL = process.env.WEATHER_API_URL;
-
-export const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
