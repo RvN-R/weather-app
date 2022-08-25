@@ -1,3 +1,4 @@
+require("dotenv").config();
 export const geoApiOptions = {
   method: "GET",
   headers: {
@@ -6,8 +7,8 @@ export const geoApiOptions = {
   },
 };
 
-export const GEO_API_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo";
+export const GEO_API_URL = process.env.GEO_API_URL;
 
-export const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5";
+export const WEATHER_API_URL = process.env.WEATHER_API_URL;
 
-export const WEATHER_API_KEY = "8eda8d2e55c4584c4e18d54ba1eba5d6";
+export const WEATHER_API_KEY = process.env.WEATHER_API_KEY;

@@ -35,3 +35,28 @@
 .min-max{
     color: #757575;
 }
+
+.daily-details-grid{
+    grid-row-gap: 0;
+    grid-column-gap: 15px;
+    row-gap: 0;
+    column-gap: 15px;
+    display: grid;
+    flex: 1 1;
+    grid-template-columns: auto;
+    padding: 5px 15px;
+}
+
+.daily-details-grid-items{
+    display: flex;
+    height: 30px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.daily-details-grid-items label:first-child{
+    color: #757575;
+}
+.daily-details-grid-items label:last-child{
+    color: #212121;
+}
