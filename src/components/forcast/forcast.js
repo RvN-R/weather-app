@@ -82,5 +82,4 @@ const Forcast = ({ data }) => {
   );
 };
 
-/// got to 1:30:31
 export default Forcast;
