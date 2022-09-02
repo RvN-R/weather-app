@@ -1,4 +1,9 @@
+
+
 .container{
   max-width: 1080px;
   margin: 20px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
