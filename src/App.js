@@ -3,6 +3,7 @@ import Search from "./components/search/search.js";
 import CurrentWeather from "./components/current-weather/current-weather.js";
 import Forcast from "./components/forcast/forcast";
 import { useState } from "react";
+import genericCity from "./genericCity.jpg";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
@@ -65,7 +66,7 @@ function App() {
   };
 
   const cityInactive = {
-    backgroundImage: `url(../src/generic-city.jpg)`,
+    backgroundImage: `url(${genericCity})`,
     backgroundColor: "red",
   };
 

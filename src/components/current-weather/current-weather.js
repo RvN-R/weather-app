@@ -1,6 +1,7 @@
 import "./current.weather.css";
 
 const CurrentWeather = ({ data }) => {
+  const weatherIcon = require(`../../icons/${data.weather[0].icon}.png`);
   return (
     <div className="weather">
       <div className="top">
@@ -11,7 +12,8 @@ const CurrentWeather = ({ data }) => {
         <img
           alt="weather"
           className="weather-icon"
-          src={`icons/${data.weather[0].icon}.png`}
+          // src={`/icons/${data.weather[0].icon}.png`}
+          src={weatherIcon}
         ></img>
       </div>
       <div className="bottom">
