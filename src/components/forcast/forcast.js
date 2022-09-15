@@ -23,9 +23,6 @@ const Forcast = ({ data }) => {
     WEEK_DAYS.slice(0, dayInAWeek)
   );
 
-  const weatherData = data.list.splice(0, 7);
-  const weatherIcon = weatherData[0].weather[0].icon;
-  const weatherPath = require(`../../icons/${weatherIcon}.png`);
   return (
     <>
       <label className="title">Daily</label>
@@ -36,9 +33,7 @@ const Forcast = ({ data }) => {
               <AccordionItemButton>
                 <div className="daily-item">
                   <img
-                    // src={`icons/${item.weather[0].icon}.png`}
-                    // src={weatherIcon[0].weather[0].icon}
-                    src={weatherPath}
+                    src={require(`../../icons/${item.weather[0].icon}.png`)}
                     className="icon-small"
                     alt="weather"
                   />
