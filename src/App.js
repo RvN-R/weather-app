@@ -67,7 +67,6 @@ function App() {
 
   const cityInactive = {
     backgroundImage: `url(${genericCity})`,
-    backgroundColor: "red",
   };
 
   function backgroundImageDecider() {

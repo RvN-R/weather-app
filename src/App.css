@@ -2,8 +2,16 @@
 
 .container{
   max-width: 1080px;
-  margin: 20px auto;
+  margin: auto;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  padding: 5px;
+  height: 1000px;
+}
+
+@media only screen and (max-width: 1440px){
+  .container{
+    margin: 20px auto;
+  }
 }

@@ -25,7 +25,9 @@ const Forcast = ({ data }) => {
 
   return (
     <>
-      <label className="title">Daily</label>
+      <div className="title-container">
+        <label className="title">Daily</label>
+      </div>
       <Accordion allowZeroExpanded>
         {data.list.splice(0, 7).map((item, idx) => (
           <AccordionItem key={idx}>

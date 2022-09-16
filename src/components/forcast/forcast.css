@@ -1,3 +1,12 @@
+.title-container{
+    align-items: center;
+    display: flex;
+    height: 40px;
+    margin: 5px;
+    justify-content: center;
+    background: rgb(255,255,255,0.5);
+    border-radius: 5px;
+}
 .title{
     font-size: 23px;
     font-weight: 700;
@@ -45,6 +54,10 @@
     flex: 1 1;
     grid-template-columns: auto;
     padding: 5px 15px;
+    background: rgba(200,200,200,0.5);
+    border-radius: 15px;
+    margin: 5px;
+    font-weight: 500;
 }
 
 .daily-details-grid-items{
@@ -55,7 +68,7 @@
 }
 
 .daily-details-grid-items label:first-child{
-    color: #757575;
+    color: #212121;
 }
 .daily-details-grid-items label:last-child{
     color: #212121;
