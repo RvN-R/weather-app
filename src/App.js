@@ -1,31 +1,30 @@
 import "./App.css";
 import Search from "./components/search/search.js";
+import Banner from "./components/banner/banner";
 import CurrentWeather from "./components/current-weather/current-weather.js";
 import Forcast from "./components/forcast/forcast";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import genericCity from "./genericCity.jpg";
 
 function App() {
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
-  const [backgroundImage, setBackgroundImage] = useState(null);
+  const [containerBackground, setContainerBackground] = useState([]);
+  const [imageAppears, setImageAppears] = useState(false);
 
   const handleOnSearchChange = (searchData) => {
     const [lat, lon] = searchData.value.split(" ");
 
-    const fetchedName = searchData.label;
-    const numSpaces = fetchedName.split(" ").length - 1;
-    let amendedName = "";
+    const fetchCityName = searchData.label;
 
-    if (numSpaces === 2) {
-      amendedName = fetchedName.toLowerCase().replace(" ", "-").split(" ");
-    } else {
-      amendedName = fetchedName.toLowerCase().split(" ");
-    }
+    const locationOfComma = fetchCityName.toLowerCase().indexOf(",");
 
-    console.log(amendedName[0]);
+    const googleCityName = fetchCityName
+      .toLowerCase()
+      .slice(0, locationOfComma);
 
     const backgroundImageFetch = fetch(
-      `https://api.teleport.org/api/urban_areas/slug:${amendedName[0]}/images/`
+      `https://api.teleport.org/api/urban_areas/slug:${googleCityName}/images/`
     );
 
     const currentWeatherFetch = fetch(
@@ -42,34 +41,38 @@ function App() {
         const forcastResponse = await response[1].json();
         const backgroundImageResponse = await response[2].json();
 
-        console.log(backgroundImageResponse);
-
         setCurrentWeather({ city: searchData.label, ...weatherResponse });
         setForecast({ city: searchData.label, ...forcastResponse });
+        setContainerBackground(backgroundImageResponse.photos[0].image);
+        setImageAppears(true);
       })
 
       .catch((err) => {
         console.log(err);
+        setImageAppears(false);
       });
-
-    console.log(process.env.NODE_ENV);
   };
 
-  // use the effects to see if you can replace london with other cities to get there images
-  useEffect(() => {
-    fetch(`https://api.teleport.org/api/urban_areas/slug:new-york/images/`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  const cityActive = {
+    backgroundImage: `url(${containerBackground.mobile})`,
+  };
+
+  const cityInactive = {
+    backgroundImage: `url(${genericCity})`,
+  };
+
+  function backgroundImageDecider() {
+    if (imageAppears === false) {
+      return cityInactive;
+    } else {
+      return cityActive;
+    }
+  }
 
   return (
-    <div className="container">
+    <div className="container" style={backgroundImageDecider()}>
       <Search onSearchChange={handleOnSearchChange} />
+      <div>{currentWeather === null && <Banner />}</div>
       {currentWeather && <CurrentWeather data={currentWeather} />}
       {forecast && <Forcast data={forecast} />}
     </div>

@@ -1,22 +1,20 @@
 import { useState } from "react";
 import { AsyncPaginate } from "react-select-async-paginate";
-import { geoApiOptions } from "../../api";
 
 const Search = ({ onSearchChange }) => {
   const [search, setSearch] = useState(null);
 
   const loadOptions = (inputValue) => {
     return fetch(
-      `${process.env.REACT_APP_GEO_API_URL}/cities?minPopulation=1000000&namePrefix=${inputValue}`,
-      geoApiOptions
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=${process.env.REACT_APP_GOOGLE_GEOCODE_API_KEY}`
     )
       .then((response) => response.json())
       .then((response) => {
         return {
-          options: response.data.map((city) => {
+          options: response.results.map((city) => {
             return {
-              value: `${city.latitude} ${city.longitude}`,
-              label: `${city.name} ${city.countryCode}`,
+              value: `${city.geometry.location.lat} ${city.geometry.location.lng}`,
+              label: `${city.formatted_address}`,
             };
           }),
         };
@@ -31,7 +29,7 @@ const Search = ({ onSearchChange }) => {
 
   return (
     <AsyncPaginate
-      placeholder="Search for city"
+      placeholder="Type the name of you city..."
       debounceTimeout={600}
       value={search}
       onChange={handleOnChange}
