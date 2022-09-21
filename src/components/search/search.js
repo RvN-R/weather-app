@@ -6,7 +6,7 @@ const Search = ({ onSearchChange }) => {
 
   const loadOptions = (inputValue) => {
     return fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=AIzaSyDjbbtMJaI0Gq_mxHVedpa1JIA0WjXMb0Q`
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${inputValue}&key=${process.env.REACT_APP_GOOGLE_GEOCODE_API_KEY}`
     )
       .then((response) => response.json())
       .then((response) => {
@@ -29,7 +29,7 @@ const Search = ({ onSearchChange }) => {
 
   return (
     <AsyncPaginate
-      placeholder="Search for city"
+      placeholder="Type the name of you city..."
       debounceTimeout={600}
       value={search}
       onChange={handleOnChange}

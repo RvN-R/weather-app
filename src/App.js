@@ -1,5 +1,6 @@
 import "./App.css";
 import Search from "./components/search/search.js";
+import Banner from "./components/banner/banner";
 import CurrentWeather from "./components/current-weather/current-weather.js";
 import Forcast from "./components/forcast/forcast";
 import { useState } from "react";
@@ -17,6 +18,7 @@ function App() {
     const fetchCityName = searchData.label;
 
     const locationOfComma = fetchCityName.toLowerCase().indexOf(",");
+
     const googleCityName = fetchCityName
       .toLowerCase()
       .slice(0, locationOfComma);
@@ -70,6 +72,7 @@ function App() {
   return (
     <div className="container" style={backgroundImageDecider()}>
       <Search onSearchChange={handleOnSearchChange} />
+      <div>{currentWeather === null && <Banner />}</div>
       {currentWeather && <CurrentWeather data={currentWeather} />}
       {forecast && <Forcast data={forecast} />}
     </div>
