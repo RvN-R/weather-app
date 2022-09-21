@@ -15,22 +15,14 @@ function App() {
     const [lat, lon] = searchData.value.split(" ");
 
     const fetchCityName = searchData.label;
-    const numSpaces = fetchCityName.split(" ").length - 1;
-    let amendedCityName = "";
 
-    if (numSpaces === 2) {
-      amendedCityName = fetchCityName
-        .toLowerCase()
-        .replace(" ", "-")
-        .split(" ");
-    } else {
-      amendedCityName = fetchCityName.toLowerCase().split(" ");
-    }
-
-    console.log(amendedCityName[0]);
+    const locationOfComma = fetchCityName.toLowerCase().indexOf(",");
+    const googleCityName = fetchCityName
+      .toLowerCase()
+      .slice(0, locationOfComma);
 
     const backgroundImageFetch = fetch(
-      `https://api.teleport.org/api/urban_areas/slug:${amendedCityName[0]}/images/`
+      `https://api.teleport.org/api/urban_areas/slug:${googleCityName}/images/`
     );
 
     const currentWeatherFetch = fetch(
@@ -57,8 +49,6 @@ function App() {
         console.log(err);
         setImageAppears(false);
       });
-
-    // console.log(process.env.NODE_ENV);
   };
 
   const cityActive = {
@@ -79,7 +69,6 @@ function App() {
 
   return (
     <div className="container" style={backgroundImageDecider()}>
-      {/* <div>{containerBackground.mobile}</div> */}
       <Search onSearchChange={handleOnSearchChange} />
       {currentWeather && <CurrentWeather data={currentWeather} />}
       {forecast && <Forcast data={forecast} />}
