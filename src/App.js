@@ -15,16 +15,31 @@ function App() {
   const handleOnSearchChange = (searchData) => {
     const [lat, lon] = searchData.value.split(" ");
 
+    // fetchCityName pulls the city name from search.js
     const fetchCityName = searchData.label;
-
+    // locationOfComma returns the location of the comma from the result of fetchCityName
     const locationOfComma = fetchCityName.toLowerCase().indexOf(",");
-
+    // googleCityName returns the name of the city without its initials. Instead of London,UK it returns london
     const googleCityName = fetchCityName
       .toLowerCase()
       .slice(0, locationOfComma);
 
+    // locationOfSpace checks googleCityName results and returns the location of a space
+    const locationOfSpace = googleCityName.indexOf(" ");
+    // includesSpace checks googleCityName and returns true or false as to whether the name has a space
+    const includesSpace = googleCityName.includes(" ");
+
+    let cityName = "";
+    // if statement below checks includesSpace, if true it takes the googleCityName for example Sydney NSW and returns sydney
+    // if false it takes the googelCityName for example London, UK and returns london
+    if (includesSpace === true) {
+      cityName = googleCityName.slice(0, locationOfSpace);
+    } else {
+      cityName = fetchCityName.toLowerCase().slice(0, locationOfComma);
+    }
+
     const backgroundImageFetch = fetch(
-      `https://api.teleport.org/api/urban_areas/slug:${googleCityName}/images/`
+      `https://api.teleport.org/api/urban_areas/slug:${cityName}/images/`
     );
 
     const currentWeatherFetch = fetch(
