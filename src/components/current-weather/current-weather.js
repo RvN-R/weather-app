@@ -1,4 +1,4 @@
-import "./current.weather.css";
+import "./current-weather.css";
 
 const CurrentWeather = ({ data }) => {
   const weatherIcon = require(`../../icons/${data.weather[0].icon}.png`);
