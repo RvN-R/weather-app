@@ -38,8 +38,22 @@ function App() {
       cityName = fetchCityName.toLowerCase().slice(0, locationOfComma);
     }
 
+    // first attempt at fetching Road Goat api, need to use BasicAuth using myHeaders and then adding that to the header response
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization",
+      `Basic ${process.env.REACT_APP_ROAD_GOAT_AUTH}`
+    );
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
     const backgroundImageFetch = fetch(
-      `https://api.teleport.org/api/urban_areas/slug:${cityName}/images/`
+      `https://api.roadgoat.com/api/v2/destinations/auto_complete?q=${cityName}`,
+      requestOptions
     );
 
     const currentWeatherFetch = fetch(
@@ -58,7 +72,10 @@ function App() {
 
         setCurrentWeather({ city: searchData.label, ...weatherResponse });
         setForecast({ city: searchData.label, ...forcastResponse });
-        setContainerBackground(backgroundImageResponse.photos[0].image);
+        setContainerBackground(
+          backgroundImageResponse.included[0].attributes.image
+        );
+
         setImageAppears(true);
       })
 
@@ -69,7 +86,7 @@ function App() {
   };
 
   const cityActive = {
-    backgroundImage: `url(${containerBackground.mobile})`,
+    backgroundImage: `url(${containerBackground.full})`,
   };
 
   const cityInactive = {
