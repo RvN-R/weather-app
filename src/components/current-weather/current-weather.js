@@ -2,8 +2,24 @@ import "./current-weather.css";
 
 const CurrentWeather = ({ data }) => {
   const weatherIcon = require(`../../icons/${data.weather[0].icon}.png`);
+
+  const weatherStyle = {
+    width: 300,
+    borderRadius: 6,
+    color: "white",
+    backgroundColor: "#333",
+    paddingTop: 0,
+    paddingRight: 20,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    marginTop: 20,
+    marginRight: "auto",
+    marginBottom: 0,
+    marginLeft: "auto",
+  };
+
   return (
-    <div className="weather">
+    <div className="weather" style={weatherStyle}>
       <div className="top">
         <div>
           <p className="city">{data.city}</p>
