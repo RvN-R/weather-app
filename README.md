@@ -19,17 +19,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-# Using the live site
-
-Type your city into the search bar at the top of the site:
-
-<p align="center"><img src ="/Users/richardvannairn/react-weather-app/README Images/weather-site-search-image.png" style="max-width: 100%"></p>
-
-A seven day weather report of your city should appear, with a report for the current day at the top:
-
-<p align="center"><img src ="/Users/richardvannairn/react-weather-app/README Images/weather-site-search-result.png" style="max-width: 100%"></p>
-
-By clicking on the day a drop down will appear with additional weather information including pressure, humidity, wind speed, sea level and most importantly what it actually feels like outside!
-
-<p align="center"><img src ="/Users/richardvannairn/react-weather-app/README Images/weather-site-search-expand.png" style="max-width: 100%"></p>
